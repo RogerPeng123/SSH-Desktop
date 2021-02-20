@@ -41,7 +41,7 @@
                 this.$electron.shell.openExternal(link)
             },
             jump() {
-                // this.$router.push({name: 'xterm-page'});
+                // this.$router.push({name: 'xterm-page'})
 
                 let routeData = this.$router.resolve({
                     name: 'xterm-page',
