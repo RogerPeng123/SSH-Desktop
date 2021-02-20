@@ -6,7 +6,6 @@
     import {Terminal} from 'xterm'
     // import {FitAddon} from 'xterm-addon-fit'
     // import {AttachAddon} from 'xterm-addon-attach'
-    import {WSSHClient} from './../WSSHClient/WsshClieentClass'
 
     export default {
         name: "XtermPage",
@@ -15,6 +14,7 @@
                 socket: null,
                 term: null,
                 options: {},
+                client: null
             }
         },
         props: {
@@ -24,14 +24,14 @@
             },
         },
         mounted() {
-            this.initxterm();
+            this.initXterm();
         },
         beforeDestroy() {
             this.socket.close();
             this.term.dispose();
         },
         methods: {
-            initxterm() {
+            initXterm() {
                 this.options = {
                     operate: 'connect',
                     host: '139.224.25.63',
@@ -40,7 +40,8 @@
                     password: '1qaz@WSX,.',
                 };
 
-                let client = new WSSHClient();
+                this.client = new this.$sshClient();
+
                 let term = new Terminal({
                     cols: 97,
                     rows: 37,
@@ -53,7 +54,7 @@
 
                 term.onData(data => {
                     console.log('输入的是: ', data);
-                    client.sendClientData(data);
+                    this.client.sendClientData(data);
                 });
 
                 term.open(document.getElementById('xterm'));
@@ -62,14 +63,14 @@
                 term.write('Connecting....');
 
                 //执行链接操作
-                client.connect({
+                this.client.connect({
                     onError: function (error) {
                         //链接失败回调
                         term.write('Error: ' + error + '\r\n');
                     },
                     onConnect: function () {
                         //链接成功回调
-                        client.sendInitData(this.options);
+                        this.client.sendInitData(this.options);
                     },
                     onClose: function () {
                         //链接关闭回调

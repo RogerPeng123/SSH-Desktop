@@ -1,4 +1,7 @@
-class WsshClient {
+export default {
+
+    constructor() {
+    },
 
     _generateEndpoint() {
         let protocol = '';
@@ -9,7 +12,7 @@ class WsshClient {
         }
 
         return protocol + '127.0.0.1:8080/webssh';
-    }
+    },
 
     connect(options) {
         let endpoint = this._generateEndpoint();
@@ -34,15 +37,15 @@ class WsshClient {
         this._connection.onclose = function (evt) {
             options.onClose();
         }
-    }
+    },
 
     send(data) {
         this._connection.send(JSON.stringify(data));
-    }
+    },
 
     sendInitData(options) {
         this._connection.send(JSON.stringify(options));
-    }
+    },
 
     sendClientData(data) {
         this._connection.send(JSON.stringify({
@@ -51,5 +54,3 @@ class WsshClient {
         }))
     }
 }
-
-export default WsshClient;

@@ -4,9 +4,9 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 import store from './store'
-import utils from './WSSHClient/WsshClieentClass'
+import WsshClient from "./WSSHClient/WsshClieentClass";
 
-Vue.prototype.utils = utils;
+Vue.prototype.$sshClient = WsshClient
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios

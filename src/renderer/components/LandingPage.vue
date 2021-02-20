@@ -17,7 +17,8 @@
                         internal configurations, using the project structure, building your application,
                         and so much more.
                     </p>
-                    <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs
+                    <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">
+                      Read the Docs
                     </button>
                     <br><br>
                 </div>
