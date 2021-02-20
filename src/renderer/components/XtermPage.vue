@@ -51,14 +51,13 @@
                 });
 
                 term.onData(data => {
-                    console.log('输入的是: ', data);
                     this.sendClientData(data);
                 });
 
                 term.open(document.getElementById('xterm'));
 
                 //初始化等待链接
-                term.write('Connecting....');
+                term.write('正在链接....');
 
                 let self = this;
 
@@ -66,7 +65,7 @@
                 this.connect({
                     onError: function (error) {
                         //链接失败回调
-                        term.write('Error: ' + error + '\r\n');
+                        term.write('错误: ' + error + '\r\n');
                     },
                     onConnect: function () {
                         //链接成功回调
@@ -74,7 +73,7 @@
                     },
                     onClose: function () {
                         //链接关闭回调
-                        term.write("\rconnection close");
+                        term.write("\r链接关闭");
                     },
                     onData: function (data) {
                         term.write(data)
@@ -99,7 +98,6 @@
                 if (window.WebSocket) {
                     this._connection = new WebSocket(endpoint);
                 } else {
-                    console.error("WebSocket Not Supported!");
                     options.onError("WebSocket Not Supported!");
                     return;
                 }
